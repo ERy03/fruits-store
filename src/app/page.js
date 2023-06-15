@@ -1,3 +1,36 @@
+const mockProducts = [
+  {
+    id: 1,
+    name: "Apple",
+    href: "#",
+    price: "¥1000",
+    description: "The best apple in the world",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
+    imageAlt: "Shining red apple with water droplets on it",
+  },
+  {
+    id: 2,
+    name: "Banana",
+    href: "#",
+    price: "¥2000",
+    description: "The best banana in the world",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-01-image-card-01.jpg",
+    imageAlt: "Yellow banana",
+  },
+  {
+    id: 3,
+    name: "Orange",
+    href: "#",
+    price: "¥3000",
+    description: "The best orange in the world",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-01.jpg",
+    imageAlt: "Orange orange",
+  },
+];
+
 export default function HomePage() {
   return (
     <main>
