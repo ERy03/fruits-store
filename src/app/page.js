@@ -1,3 +1,5 @@
+import storeFront from "../../utils";
+
 const mockProducts = [
   {
     id: 1,
@@ -31,7 +33,9 @@ const mockProducts = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { data } = await storeFront(productsQuery);
+  console.log(data.products);
   return (
     <main>
       <div className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24">
@@ -57,6 +61,62 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      <div className="max-w-2xl mx-auto pt-24 px-4 sm:pt-32 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 id="products-heading" className="sr-only">
+          Products
+        </h2>
+
+        <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+          {mockProducts.map((product) => (
+            <a key={product.id} href={product.href} className="group">
+              <div className="w-full aspect-w-3 aspect-h-3  rounded-lg overflow-hidden ">
+                <img
+                  src={product.imageSrc}
+                  alt={product.imageAlt}
+                  className="w-full h-full object-center object-cover group-hover:opacity-75"
+                />
+              </div>
+              <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
+                <h3>{product.name}</h3>
+                <p>{product.price}</p>
+              </div>
+              <p className="mt-1 text-sm text-gray-500">
+                {product.description}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
     </main>
   );
 }
+
+const gql = String.raw;
+
+const productsQuery = gql`
+  query Products {
+    products(first: 6) {
+      edges {
+        node {
+          title
+          handle
+          tags
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+          images(first: 1) {
+            edges {
+              node {
+                transformedSrc
+                altText
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
