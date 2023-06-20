@@ -1,4 +1,4 @@
-import storeFront from "../../utils";
+import { formatPrice, storeFront } from "../../utils";
 import Link from "next/link";
 
 const mockProducts = [
@@ -89,7 +89,9 @@ export default async function HomePage() {
                 </div>
                 <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
                   <h3>{product.title}</h3>
-                  <p>{product.priceRange.minVariantPrice.amount}</p>
+                  <p>
+                    {formatPrice(product.priceRange.minVariantPrice.amount)}
+                  </p>
                 </div>
                 <p className="mt-1 text-sm text-gray-500">{product.tags[0]}</p>
               </Link>

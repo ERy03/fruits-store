@@ -1,4 +1,4 @@
-export default async function storeFront(query, variables = {}) {
+export async function storeFront(query, variables = {}) {
   console.log("hello");
   const response = await fetch(process.env.NEXT_PUBLIC_API_URL, {
     method: "POST",
@@ -13,4 +13,11 @@ export default async function storeFront(query, variables = {}) {
   });
   const result = await response.json();
   return result;
+}
+
+export function formatPrice(price) {
+  return new Intl.NumberFormat("ja-JP", {
+    style: "currency",
+    currency: "JPY",
+  }).format(price);
 }
