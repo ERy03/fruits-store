@@ -1,4 +1,5 @@
 import storeFront from "../../utils";
+import Link from "next/link";
 
 const mockProducts = [
   {
@@ -35,7 +36,7 @@ const mockProducts = [
 
 export default async function HomePage() {
   const { data } = await storeFront(productsQuery);
-  console.log(data.products);
+  const products = data.products.edges;
   return (
     <main>
       <div className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24">
@@ -54,7 +55,7 @@ export default async function HomePage() {
                 href="#"
                 className="w-full flex items-center justify-center px-6 py-4 border border-transparent text-base font-medium rounded-md divide-x  text-white bg-indigo-600 hover:bg-indigo-700 md:text-lg md:py-4 md:px-10"
               >
-                <span className="pr-6">Get the Basket</span>
+                <span className="pr-6">Get Everything</span>
                 <span className="pl-6">¥30,000</span>
               </a>
             </div>
@@ -68,24 +69,32 @@ export default async function HomePage() {
         </h2>
 
         <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-          {mockProducts.map((product) => (
-            <a key={product.id} href={product.href} className="group">
-              <div className="w-full aspect-w-3 aspect-h-3  rounded-lg overflow-hidden ">
-                <img
-                  src={product.imageSrc}
-                  alt={product.imageAlt}
-                  className="w-full h-full object-center object-cover group-hover:opacity-75"
-                />
-              </div>
-              <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
-                <h3>{product.name}</h3>
-                <p>{product.price}</p>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">
-                {product.description}
-              </p>
-            </a>
-          ))}
+          {products.map((item) => {
+            const product = item.node;
+            console.log(product);
+            const image = product.images.edges[0].node;
+            console.log(product.tags[0]);
+            return (
+              <Link
+                key={product.handle}
+                href={`/products/${product.handle}`}
+                className="group"
+              >
+                <div className="w-full aspect-w-3 aspect-h-3  rounded-lg overflow-hidden ">
+                  <img
+                    src={image.transformedSrc}
+                    alt={product.altText}
+                    className="w-full h-full object-center object-cover group-hover:opacity-75"
+                  />
+                </div>
+                <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
+                  <h3>{product.title}</h3>
+                  <p>{product.priceRange.minVariantPrice.amount}</p>
+                </div>
+                <p className="mt-1 text-sm text-gray-500">{product.tags[0]}</p>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </main>
