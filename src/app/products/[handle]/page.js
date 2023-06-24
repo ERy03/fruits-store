@@ -1,4 +1,42 @@
 import { storeFront } from "../../../../utils";
+const relatedProducts = [
+  {
+    id: 1,
+    name: "Apple Jam",
+    href: "#",
+    price: "¥1000",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/product-page-04-related-product-01.jpg",
+    imageAlt: "Jar of apple jam beside fresh apples.",
+  },
+  {
+    id: 2,
+    name: "Apple Jam",
+    href: "#",
+    price: "¥1000",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/product-page-05-related-product-01.jpg",
+    imageAlt: "Jar of apple jam beside fresh apples.",
+  },
+  {
+    id: 3,
+    name: "Apple Jam",
+    href: "#",
+    price: "¥1000",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageAlt: "Jar of apple jam beside fresh apples.",
+  },
+  {
+    id: 4,
+    name: "Apple Jam",
+    href: "#",
+    price: "¥1000",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/product-page-02-related-product-01.jpg",
+    imageAlt: "Jar of apple jam beside fresh apples.",
+  },
+];
 
 export default function Example() {
   return (
@@ -24,8 +62,26 @@ export default function Example() {
                 {/* {product.title} */}
                 dog
               </h1>
+
+              <h2 id="information-heading" className="sr-only">
+                Product information
+              </h2>
+              <p className="text-sm text-gray-500 mt-2">
+                {/* {product.tags[0]} &middot; Updated{' '} */}
+                {/* <time dateTime={product.updatedAt}>{format(new Date(product.updateAt), "dd MM yyyy")}</time> */}
+                something
+              </p>
             </div>
           </div>
+
+          <p className="text-gray-500 mt-6">
+            {/* {product.description} */}
+            lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+            quod, voluptatum, quae, quia, voluptas quibusdam quos natus quas
+            voluptatibus doloribus fugiat. Quisquam quod, voluptatum, quae,
+            quia, voluptas quibusdam quos natus quas voluptatibus doloribus
+            fugiat.
+          </p>
         </div>
       </div>
     </main>
