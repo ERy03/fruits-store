@@ -82,6 +82,38 @@ export default function Example() {
             quia, voluptas quibusdam quos natus quas voluptatibus doloribus
             fugiat.
           </p>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+            <button
+              type="button"
+              className="w-full bg-gray-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+            >
+              {/* Pay {formatPrice(product.pricerange.minVariantPrice.amount)} */}
+              Pay Now
+            </button>
+            <button
+              type="button"
+              className="w-full bg-white border rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+            >
+              Preview
+            </button>
+          </div>
+
+          <div className="border-t border-gray-200 mt-10 pt-10">
+            <h3 className="text-sm font-medium text-gray-900">Lorem ipsum</h3>
+            <p className="mt-4 text-sm text-gray-500">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit
+              dolores id similique accusantium excepturi. Dignissimos quisquam
+              debitis laboriosam maxime nam cum soluta, illum tenetur ipsam
+              veritatis eum aut animi voluptatibus.{" "}
+              <a
+                href="#"
+                className="font-medium text-gray-900 hover:text-gray-700"
+              >
+                Read more
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </main>
