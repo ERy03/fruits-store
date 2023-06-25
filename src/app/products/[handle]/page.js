@@ -1,19 +1,19 @@
-import { storeFront } from "../../../../utils";
+import { formatPrice, storeFront } from "../../../../utils";
 const relatedProducts = [
   {
     id: 1,
     name: "Apple Jam",
     href: "#",
-    price: "¥1000",
+    price: "1000",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-04-related-product-01.jpg",
+      "https://tailwindui.com/img/ecommerce-images/product-page-05-related-product-02.jpg",
     imageAlt: "Jar of apple jam beside fresh apples.",
   },
   {
     id: 2,
     name: "Apple Jam",
     href: "#",
-    price: "¥1000",
+    price: "1000",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/product-page-05-related-product-01.jpg",
     imageAlt: "Jar of apple jam beside fresh apples.",
@@ -22,18 +22,18 @@ const relatedProducts = [
     id: 3,
     name: "Apple Jam",
     href: "#",
-    price: "¥1000",
+    price: "1000",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
+      "https://tailwindui.com/img/ecommerce-images/product-page-05-related-product-03.jpg",
     imageAlt: "Jar of apple jam beside fresh apples.",
   },
   {
     id: 4,
     name: "Apple Jam",
     href: "#",
-    price: "¥1000",
+    price: "1000",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-02-related-product-01.jpg",
+      "https://tailwindui.com/img/ecommerce-images/product-page-05-related-product-04.jpg",
     imageAlt: "Jar of apple jam beside fresh apples.",
   },
 ];
@@ -114,6 +114,44 @@ export default function Example() {
               </a>
             </p>
           </div>
+        </div>
+      </div>
+
+      {/* Realted Products */}
+      <div className="max-w-2xl mx-auto mt-24 sm:mt-32 lg:max-w-none">
+        <div className="flex items-center justify-between space-x-4">
+          <h2 className="text-lg font-medium text-gray-900">
+            Customers also viewed
+          </h2>
+          <a
+            href="#"
+            className="white-space-nowrap text-sm font-medium text-gray-900 hover:text-gray-700"
+          >
+            View all<span aria-hidden="true"> &rarr;</span>
+          </a>
+        </div>
+        <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
+          {relatedProducts.map((product) => (
+            <div key={product.id} className="group relative">
+              <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden bg-gray-100">
+                <img
+                  src={product.imageSrc}
+                  alt={product.imageAlt}
+                  className="object-center object-cover group-hover:opacity-75"
+                />
+              </div>
+              <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900 space-x-8">
+                <h3>
+                  <a href="#">
+                    <span aria-hidden="true" className="absolute inset-0" />
+                    {product.name}
+                  </a>
+                </h3>
+                <p>{formatPrice(product.price)}</p>
+              </div>
+              <p className="mt-1 text-sm text-gray-500">{product.category}</p>
+            </div>
+          ))}
         </div>
       </div>
     </main>
