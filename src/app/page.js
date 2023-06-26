@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { formatPrice, storeFront } from "../../utils";
 import Link from "next/link";
 
@@ -48,9 +49,11 @@ export default async function HomePage() {
                 className="group"
               >
                 <div className="w-full aspect-w-3 aspect-h-3  rounded-lg overflow-hidden ">
-                  <img
-                    src={image.transformedSrc}
-                    alt={product.altText}
+                  <Image
+                    width={500}
+                    height={500}
+                    src={image.url}
+                    alt={image.altText}
                     className="w-full h-full object-center object-cover group-hover:opacity-75"
                   />
                 </div>
@@ -78,7 +81,7 @@ const productsQuery = gql`
       edges {
         node {
           title
-          handle
+          description
           tags
           priceRange {
             minVariantPrice {
@@ -88,7 +91,7 @@ const productsQuery = gql`
           images(first: 1) {
             edges {
               node {
-                transformedSrc
+                url
                 altText
               }
             }
