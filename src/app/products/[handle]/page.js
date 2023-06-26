@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { formatPrice, storeFront } from "../../../../utils";
 const relatedProducts = [
   {
@@ -44,7 +45,9 @@ export default function Example() {
       <div className="lg:grid lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
         <div className="lg:col-span-4">
           <div className="aspect-w-4 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden">
-            <img
+            <Image
+              width={500}
+              height={500}
               // src={product.imageSrc}
               src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80"
               // alt={product.imageAlt}
@@ -157,3 +160,32 @@ export default function Example() {
     </main>
   );
 }
+
+const gql = String.raw;
+
+const SingleProduct = gql`
+  query Products {
+    products(first: 6) {
+      edges {
+        node {
+          title
+          handle
+          tags
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+          images(first: 1) {
+            edges {
+              node {
+                url
+                altText
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
