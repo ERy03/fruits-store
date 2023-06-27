@@ -42,6 +42,7 @@ export default async function HomePage() {
             console.log(product);
             const image = product.images.edges[0].node;
             console.log(product.tags[0]);
+            console.log(product.handle);
             return (
               <Link
                 key={product.handle}
@@ -81,7 +82,7 @@ const productsQuery = gql`
       edges {
         node {
           title
-          description
+          handle
           tags
           priceRange {
             minVariantPrice {
