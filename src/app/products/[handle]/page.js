@@ -1,53 +1,21 @@
 import Image from "next/image";
 import { format, parseISO } from "date-fns";
 import { formatPrice, storeFront } from "../../../../utils";
-const relatedProducts = [
-  {
-    id: 1,
-    name: "Apple Jam",
-    href: "#",
-    price: "1000",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-05-related-product-02.jpg",
-    imageAlt: "Jar of apple jam beside fresh apples.",
-  },
-  {
-    id: 2,
-    name: "Apple Jam",
-    href: "#",
-    price: "1000",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-05-related-product-01.jpg",
-    imageAlt: "Jar of apple jam beside fresh apples.",
-  },
-  {
-    id: 3,
-    name: "Apple Jam",
-    href: "#",
-    price: "1000",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-05-related-product-03.jpg",
-    imageAlt: "Jar of apple jam beside fresh apples.",
-  },
-  {
-    id: 4,
-    name: "Apple Jam",
-    href: "#",
-    price: "1000",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-05-related-product-04.jpg",
-    imageAlt: "Jar of apple jam beside fresh apples.",
-  },
-];
 
 export default async function Example({ params }) {
   const { data } = await storeFront(SingleProductQuery, {
     handle: params.handle,
   });
-  const productByHandle = data.product;
+  // related products
+  const relatedProducts = data.products.edges
+    .filter((item) => item.node.handle !== params.handle)
+    .slice(0, 4);
+  // single product
+  const productByHandle = data.productByHandle;
   const image = productByHandle.images.edges[0].node;
   console.log(productByHandle);
   console.log(image);
+
   return (
     <main className="mx-auto pt-14 px-4 sm:pt-24 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="lg:grid lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
@@ -169,8 +137,9 @@ const gql = String.raw;
 
 const SingleProductQuery = gql`
   query SingleProduct($handle: String!) {
-    product(handle: $handle) {
+    productByHandle(handle: $handle) {
       title
+      handle
       description
       updatedAt
       tags
@@ -184,6 +153,28 @@ const SingleProductQuery = gql`
           node {
             url
             altText
+          }
+        }
+      }
+    }
+    products(first: 6) {
+      edges {
+        node {
+          title
+          handle
+          tags
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+          images(first: 1) {
+            edges {
+              node {
+                url
+                altText
+              }
+            }
           }
         }
       }
