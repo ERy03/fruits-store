@@ -83,14 +83,7 @@ export default async function Example({ params }) {
             </div>
           </div>
 
-          <p className="text-gray-500 mt-6">
-            {/* {product.description} */}
-            lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            quod, voluptatum, quae, quia, voluptas quibusdam quos natus quas
-            voluptatibus doloribus fugiat. Quisquam quod, voluptatum, quae,
-            quia, voluptas quibusdam quos natus quas voluptatibus doloribus
-            fugiat.
-          </p>
+          <p className="text-gray-500 mt-6">{productByHandle.description}</p>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
             <button
