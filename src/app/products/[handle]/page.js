@@ -16,6 +16,9 @@ export default async function Example({ params }) {
   const image = productByHandle.images.edges[0].node;
   console.log(productByHandle);
   console.log(image);
+  // variant id
+  const variantId = productByHandle.variants.edges[0].node.id;
+  console.log(variantId);
 
   return (
     <main className="mx-auto pt-14 px-4 sm:pt-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -162,6 +165,13 @@ const SingleProductQuery = gql`
           node {
             url
             altText
+          }
+        }
+      }
+      variants(first: 1) {
+        edges {
+          node {
+            id
           }
         }
       }
