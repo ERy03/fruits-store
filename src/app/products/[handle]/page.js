@@ -44,7 +44,9 @@ export default async function Example({ params }) {
     handle: params.handle,
   });
   const productByHandle = data.product;
+  const image = productByHandle.images.edges[0].node;
   console.log(productByHandle);
+  console.log(image);
   return (
     <main className="mx-auto pt-14 px-4 sm:pt-24 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="lg:grid lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
@@ -53,10 +55,8 @@ export default async function Example({ params }) {
             <Image
               width={500}
               height={500}
-              // src={product.imageSrc}
-              src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80"
-              // alt={product.imageAlt}
-              alt="test"
+              src={image.url}
+              alt={image.altText}
               className="object-center object-cover"
             />
           </div>
