@@ -1,5 +1,4 @@
 export async function storeFront(query, variables = {}) {
-  console.log("hello");
   const response = await fetch(process.env.NEXT_PUBLIC_API_URL, {
     method: "POST",
     headers: {
