@@ -39,7 +39,12 @@ const relatedProducts = [
   },
 ];
 
-export default function Example() {
+export default async function Example({ params }) {
+  const { data } = await storeFront(SingleProductQuery, {
+    handle: params.handle,
+  });
+  const productByHandle = data.product;
+  console.log(productByHandle);
   return (
     <main className="mx-auto pt-14 px-4 sm:pt-24 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="lg:grid lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
@@ -163,26 +168,23 @@ export default function Example() {
 
 const gql = String.raw;
 
-const SingleProduct = gql`
-  query Products {
-    products(first: 6) {
-      edges {
-        node {
-          title
-          handle
-          tags
-          priceRange {
-            minVariantPrice {
-              amount
-            }
-          }
-          images(first: 1) {
-            edges {
-              node {
-                url
-                altText
-              }
-            }
+const SingleProductQuery = gql`
+  query SingleProduct($handle: String!) {
+    product(handle: $handle) {
+      title
+      description
+      updatedAt
+      tags
+      priceRange {
+        minVariantPrice {
+          amount
+        }
+      }
+      images(first: 1) {
+        edges {
+          node {
+            url
+            altText
           }
         }
       }
