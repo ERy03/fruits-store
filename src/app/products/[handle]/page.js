@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { format, parseISO } from "date-fns";
 import { formatPrice, storeFront } from "../../../../utils";
+import Link from "next/link";
 
 export default async function Example({ params }) {
   const { data } = await storeFront(SingleProductQuery, {
@@ -106,27 +107,35 @@ export default async function Example({ params }) {
           </a>
         </div>
         <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
-          {relatedProducts.map((product) => (
-            <div key={product.id} className="group relative">
-              <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden bg-gray-100">
-                <img
-                  src={product.imageSrc}
-                  alt={product.imageAlt}
-                  className="object-center object-cover group-hover:opacity-75"
-                />
+          {relatedProducts.map((item) => {
+            const product = item.node;
+            const image = product.images.edges[0].node;
+            return (
+              <div key={product.handle} className="group relative">
+                <div className="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden bg-gray-100">
+                  <Image
+                    width={500}
+                    height={500}
+                    src={image.url}
+                    alt={image.altText}
+                    className="object-center object-cover group-hover:opacity-75"
+                  />
+                </div>
+                <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900 space-x-8">
+                  <h3>
+                    <Link href={`/products/${product.handle}`}>
+                      <span aria-hidden="true" className="absolute inset-0" />
+                      {product.title}
+                    </Link>
+                  </h3>
+                  <p>
+                    {formatPrice(product.priceRange.minVariantPrice.amount)}
+                  </p>
+                </div>
+                <p className="mt-1 text-sm text-gray-500">{product.tags[0]}</p>
               </div>
-              <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900 space-x-8">
-                <h3>
-                  <a href="#">
-                    <span aria-hidden="true" className="absolute inset-0" />
-                    {product.name}
-                  </a>
-                </h3>
-                <p>{formatPrice(product.price)}</p>
-              </div>
-              <p className="mt-1 text-sm text-gray-500">{product.category}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </main>
