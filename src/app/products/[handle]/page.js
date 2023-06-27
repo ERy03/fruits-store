@@ -102,12 +102,17 @@ export default async function Example({ params }) {
           </div>
 
           <div className="border-t border-gray-200 mt-10 pt-10">
-            <h3 className="text-sm font-medium text-gray-900">Lorem ipsum</h3>
+            <h3 className="text-sm font-medium text-gray-900">
+              About the fruit farm
+            </h3>
             <p className="mt-4 text-sm text-gray-500">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit
-              dolores id similique accusantium excepturi. Dignissimos quisquam
-              debitis laboriosam maxime nam cum soluta, illum tenetur ipsam
-              veritatis eum aut animi voluptatibus.{" "}
+              Welcome to our exquisite organic fruit farm, where we cultivate
+              the finest fruits using sustainable, environmentally friendly
+              practices. Our farm is a sanctuary of pure goodness, free from
+              GMOs and pesticides, ensuring that every bite you take is filled
+              with natural, untainted flavors. Committed to fair trade
+              principles, we prioritize the well-being of our farmers and
+              community.{" "}
               <a
                 href="#"
                 className="font-medium text-gray-900 hover:text-gray-700"
