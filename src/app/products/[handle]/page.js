@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { format, parseISO } from "date-fns";
 import { formatPrice, storeFront } from "../../../../utils";
 const relatedProducts = [
   {
@@ -67,17 +68,17 @@ export default async function Example({ params }) {
           <div className="flex flex-col-reverse">
             <div>
               <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
-                {/* {product.title} */}
-                dog
+                {productByHandle.title}
               </h1>
 
               <h2 id="information-heading" className="sr-only">
                 Product information
               </h2>
               <p className="text-sm text-gray-500 mt-2">
-                {/* {product.tags[0]} &middot; Updated{' '} */}
-                {/* <time dateTime={product.updatedAt}>{format(new Date(product.updateAt), "dd MM yyyy")}</time> */}
-                something
+                {productByHandle.tags[0]} &middot; Updated{" "}
+                <time dateTime={productByHandle.updatedAt}>
+                  {format(parseISO(productByHandle.updatedAt), "dd MMM yyyy")}
+                </time>
               </p>
             </div>
           </div>
