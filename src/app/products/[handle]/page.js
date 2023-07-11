@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { format, parseISO } from "date-fns";
 import { formatPrice, storeFront } from "../../../../utils";
@@ -14,11 +16,16 @@ export default async function Example({ params }) {
   // single product
   const productByHandle = data.productByHandle;
   const image = productByHandle.images.edges[0].node;
-  console.log(productByHandle);
-  console.log(image);
+
   // variant id
   const variantId = productByHandle.variants.edges[0].node.id;
-  console.log(variantId);
+
+  // checkout
+  async function checkout() {
+    const { data } = await storeFront(checkoutMutation, { variantId });
+    const { webUrl } = data.checkoutCreate.checkout;
+    window.location.href = webUrl;
+  }
 
   return (
     <main className="mx-auto pt-14 px-4 sm:pt-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -59,6 +66,7 @@ export default async function Example({ params }) {
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
             <button
+              onClick={checkout}
               type="button"
               className="w-full bg-gray-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
             >
